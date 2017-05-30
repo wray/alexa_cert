@@ -1,0 +1,13 @@
+{
+  "intents": [
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "Activity"
+    },
+    {
+      "intent": "Alerts"
+    }
+  ]
+}

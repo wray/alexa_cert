@@ -1,0 +1,17 @@
+language: python
+python:
+- '3.6'
+script: "./unittests"
+deploy:
+  provider: lambda
+  function_name: certInfo
+  region: us-east-1
+  role: arn:aws:iam::980316180835:role/lambda_techem_skill
+  runtime: python3.6
+  handler_name: lambda_handler
+  zip: "./src"
+  access_key_id: AKIAJC4OTPBSMBJD4ZBA
+  on:
+    branch: master
+  secret_access_key: 
+    secure: RbH8qeAVL8ZOX4STt/o85X9eOYYw8XJ2P4+MX4jYsmZ7aacH/MdeJeGJrgqvSBddrmvIra8pojZBSef1nCWleITqYGUddnbUf2F6RPQedKJIYl+/Lw6wYVRaPuEb7wjdfNSCe7hFzkK5PW3d/kIoTW/9NQBgwXrKUt6KYibU3aA/I7r9yj+YGuF0y7j2gj8j28HZFBRlAK9sN+A1raVRQjnyDfLH/bVChwXuMWvh/mmmz2cFp6h/LC87OOv9PmqXA6dkasdeeYlWvqxBj0RzGn81cF2xaDhURwtexfmCmRIgqMpIolyFxLRkAHAItHaGJ0FJhBw4iufqVt5wfajKBXFJOzn+Z+FRbP9UUykUwf9lKSdJpCjteHa1TFmmFVwH+P3vAXx4Nza/abw9bg+Bl0qiOzA5tHP211KxUCL59Q64Grgz28zY+m4zrGZcI+u+PREwN0ZsB7A8NZSHcGDXDGUrvS/QTBogaqmRAhnbiDlDBT5ALMzk6kha+YreP7OY26wdb3lHukuJoXPDknP/Gyw9xkx2jgLc0UjTzKGNwq0Tf531bdCUKQLr8yYfBOMpjAJziPR1OdjAIzEJO+6q5uy529gijSaOosXiqOKm1gnAlBNmzmuPpOub9aprPsKIaDgoknNll//BpTSL/62iv8u7Dt+Q2GRRqUFyKiZzgFI=

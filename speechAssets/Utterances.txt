@@ -1,0 +1,10 @@
+Activity activity
+Activity current activity
+Activity info
+Activity recent activity
+Alerts alerts
+Alerts current alerts
+Alerts recent alerts
+Alerts threats
+Alerts current threats
+Alerts active alerts
