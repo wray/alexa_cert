@@ -1,7 +1,7 @@
 language: python
 python:
 - '3.6'
-script: ./unittests
+script: "./unittests"
 deploy:
   provider: lambda
   function_name: certInfo
@@ -9,9 +9,10 @@ deploy:
   role: arn:aws:iam::980316180835:role/lambda_techem_skill
   runtime: python3.6
   handler_name: lambda_handler
-  zip: ./src
+  zip: "./src"
+  publish: true
   on:
     branch: master
-  access_key_id: AKIAJC4OTPBSMBJD4ZBA
-  secret_access_key: 
-    secure: SDBeVMkmtds2ehrsL+JorEkp9sP3CdU4bVnKsVmKuytBlj6MWYqLF5fvjgPSZzwZczrcz7RTnNEWbkNNRiyUzEjQzSFlPw71+T+FQNXi0yTknBk4C3VGCShXDgMcVfTOqbT/7cwN1qR1T2XJns4VaJWJ/qdbGPN8071YVsW80t1Ht2y3PH7Jz93VG2+9WgrFOYR2DCTepV0kCBZDvHhkHmz2tmpzaHU27aabh5ar4orPnxlYvX22ZDsWbjak+M7BG2wZz2zEjFYazbXZAuqr80x6zIQ1UpXNEagpjuSfc6v/ghBk7Jo9wc01TKM3Hfi1c0XBqLjp/7/4ibF6/0gSpXCgBSuLboY4M+N9GrTnNC7EBj5lmmb++NCYaqvd4A+T8j07+OkKHKwL+V1/ESy/nqqY70PnpGjR6J+6ikxRbVGiEySZCOVAENdRferxPOmhy++QcXzNy4xX4rn1ow6VOaL+pil3/94JIJ3hXMP3ru16oOZnbhpG1bWQmOa13GV6s5aU8fsNmj94mbtRNXhM1MVQZZAqmRwIZ9/9f2vPQc74BUOQUN4cmRh7ECDq60ypOrVg/hj1ZQ9dUsdf5mrjT28Ep7jbiBREz8c2LS84vRmz9RJa7efDqs1dYQBiQUkX9XEFeH/X3G8jymzOzLT3mKwZsYQ8VnsMAa7pCVpWywI=
+  access_key_id: AKIAJVL7HOWIC6CIKFSA
+  secret_access_key:
+    secure: KAoUiZnGFCyt7iX9Jn1abABqnJznSE5QDec7dm55qAQrS9Vvs2wdXR/LXI7oCgygZdRekwDOwOvc2eFxkxVld3ImeXiFvyqprCBljm0JNYCixBjeQgiRDOiHfj7Wtrd5un4QmoTzSiA3SWmywN6AmVcLKaxVY23AUkNBf6hsZL9zuboIjwG9g5mU2oCxY6WaEMnNqMYVDUmglVt2adP4BQF8QBcH3O9X3HQn2+ebEWzeh1HZ1iOsZZAPSbnqj6qIpQKxD4YxKzeXH4BPaZVGvMfGm5SlMJqbluAUDy7e6drfRTEhUA+IAfaxkLWgdWPbXblrq/LftqvajPxBXnUw57B2elUhYpaZcd1JqAZh6s1n2Z54DYoSW6ge0n4ZlvtEIVgVudOYp0n7QZ+5IrhsILtxa1DAaspP1bDGVfxwLbYwRh//Q1LJ+HhP9/YWxF8DwmbthtBtbSLWMy8P/ETD/T7T93Oyf4bYTlVq7LKc8qXcGeg2iSChVE0xn9J9kPBRHHGvkCXZc4+EXMLeMqNKsImNiSDOzMYdKKuV8D4ckvi221ohjRR/nlqglUSmjKVTKlVv2gj9XaNpoUqcZ367djLwodIpX+eDLOHmzXx/nmTDDh+L0DJ1PqQnn0ELqf8v/ivp38pcq+ddh21SQcgsspQiAIiRrIo17ODp8gC5PZI=
