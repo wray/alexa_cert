@@ -31,7 +31,7 @@ class AlertHTMLParser(HTMLParser):
             self.overview = True
         elif data == 'Description':
             self.overview = False
-        elif len(data) > 50 and self.overview:
+        elif len(data) > 80 and self.overview:
             self.alerts_text += data
             # re.sub('<[^>]*>','',data)
 
