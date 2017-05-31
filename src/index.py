@@ -33,13 +33,14 @@ class AlertHTMLParser(HTMLParser):
     def handle_data(self,data):
         if data == 'Overview':
             self.overview = True
-        elif len(data) > 10 and self.overview:
-            self.alerts_text += (data + "<break time='650ms' />")
+        elif len(data) > 20 and self.overview:
+            self.alerts_text += data + "<break time='650ms' />"
             # re.sub('<[^>]*>','',data)
 
 alert_parser = AlertHTMLParser()
 
 for entry in alerts['entries'][0:3]:
+    alert_parser.overview = False
     alert_parser.alerts_text += entry['title'] + ','
     alert_parser.feed(entry['summary'])
 
@@ -57,6 +58,7 @@ class ActHTMLParser(HTMLParser):
 act_parser = ActHTMLParser()
 
 for entry in activity['entries'][0:5]:
+    act_parser.summary = True
     act_parser.act_text += entry['title'] + ', '
     act_parser.feed(entry['summary'])
 
@@ -113,7 +115,7 @@ def alerts(intent, session):
     speech_output = ""
     should_end_session = True
 
-    speech_output = "<speak>" + re.sub('<[^>]*','',alert_parser.alerts_text) +"</speak>"
+    speech_output = "<speak>" + alert_parser.alerts_text +"</speak>"
 
     return build_response(session_attributes, build_speechlet_response
                           (intent['name'], speech_output, reprompt_text, should_end_session))
