@@ -17,17 +17,14 @@ from html.parser import HTMLParser
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-alerts_text = ''
-activity_text = ''
 alerts = feedparser.parse('https://www.us-cert.gov/ncas/alerts.xml')
 activity = feedparser.parse('https://www.us-cert.gov/ncas/current-activity.xml')
-
-logger.info(alerts)
-logger.info(activity)
 
 class AlertHTMLParser(HTMLParser):
 
     overview = False
+
+    alerts_text = ''
 
     def handle_starttag(self,tag,attrs):
         if self.overview and tag != 'p'and tag != 'br':
@@ -37,31 +34,30 @@ class AlertHTMLParser(HTMLParser):
         if data == 'Overview':
             self.overview = True
         elif len(data) > 20 and self.overview:
-            print(data)
+            self.alerts_text += data + '.'
 
-parser = AlertHTMLParser()
+alert_parser = AlertHTMLParser()
 
 for entry in alerts['entries'][0:5]:
-    logger.info(entry)
-    alerts_text += entry['title'] + '.'
-    alerts_text += parser.feed(entry['summary']) + '.'
+    alert_parser.alerts_text += entry['title'] + '.'
+    alert_parser.feed(entry['summary'])
 
 class ActHTMLParser(HTMLParser):
 
     summary = True
 
+    act_text = ''
+
     def handle_data(self,data):
         if len(data) > 100 and self.summary:
-            print(data)
+            self.act_text += data + '.'
             self.summary = False
 
-parser = ActHTMLParser()
+act_parser = ActHTMLParser()
 
 for entry in activity['entries'][0:5]:
-    logger.info(entry)
-    activity_text += entry['title'] + '.'
-    activity_text += parser.feed(entry['summary']) + '.'
-
+    act_parser.act_text += entry['title'] + '.'
+    act_parser.feed(entry['summary'])
 
 # --------------- Helpers that build all of the responses ----------------------
 
@@ -105,7 +101,7 @@ def activity(intent, session):
     speech_output = ""
     should_end_session = True
 
-    speech_output = "<speak>" + re.sub('<[^>]*','',activity_text) + "</speak>"
+    speech_output = "<speak>" + re.sub('<[^>]*','',act_parser.act_text) + "</speak>"
 
     return build_response(session_attributes, build_speechlet_response
                           (intent['name'], speech_output, reprompt_text, should_end_session))
@@ -116,7 +112,7 @@ def alerts(intent, session):
     speech_output = ""
     should_end_session = True
 
-    speech_output = "<speak>" + re.sub('<[^>]*','',alerts_text) +"</speak>"
+    speech_output = "<speak>" + re.sub('<[^>]*','',alert_parser.alerts_text) +"</speak>"
 
     return build_response(session_attributes, build_speechlet_response
                           (intent['name'], speech_output, reprompt_text, should_end_session))
