@@ -27,21 +27,21 @@ class AlertHTMLParser(HTMLParser):
     alerts_text = ''
 
     def handle_starttag(self,tag,attrs):
-        if self.overview and tag != 'p'and tag != 'br':
+        if self.overview and tag != 'p'and tag != 'br' and != 'a':
             self.overview = False
     
     def handle_data(self,data):
         if data == 'Overview':
             self.overview = True
         elif len(data) > 20 and self.overview:
-            self.alerts_text += data + "<break time='650ms' />"
+            self.alerts_text += data
             # re.sub('<[^>]*>','',data)
 
 alert_parser = AlertHTMLParser()
 
 for entry in alerts['entries'][0:3]:
     alert_parser.overview = False
-    alert_parser.alerts_text += entry['title'] + ','
+    alert_parser.alerts_text += "<break time = '650ms'/>" + entry['title'] + ','
     alert_parser.feed(entry['summary'])
 
 class ActHTMLParser(HTMLParser):
@@ -51,7 +51,7 @@ class ActHTMLParser(HTMLParser):
     act_text = ''
 
     def handle_data(self,data):
-        if len(data) > 50 and self.summary:
+        if len(data) > 80 and self.summary:
             self.act_text += data + "<break time='650ms'/>"
             self.summary = False
 
