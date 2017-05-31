@@ -26,13 +26,11 @@ class AlertHTMLParser(HTMLParser):
 
     alerts_text = ''
 
-    def handle_starttag(self,tag,attrs):
-        if self.overview and tag != 'p'and tag != 'br' and tag != 'a':
-            self.overview = False
-    
     def handle_data(self,data):
         if data == 'Overview':
             self.overview = True
+        elif data == 'Description':
+            self.overview = False
         elif len(data) > 20 and self.overview:
             self.alerts_text += data
             # re.sub('<[^>]*>','',data)
