@@ -33,7 +33,7 @@ class AlertHTMLParser(HTMLParser):
     def handle_data(self,data):
         if data == 'Overview':
             self.overview = True
-        elif len(data) > 20 and self.overview:
+        elif len(data) > 10 and self.overview:
             self.alerts_text += (data + "<break time='650ms' />")
             # re.sub('<[^>]*>','',data)
 
