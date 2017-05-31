@@ -34,7 +34,7 @@ class AlertHTMLParser(HTMLParser):
         if data == 'Overview':
             self.overview = True
         elif len(data) > 20 and self.overview:
-            self.alerts_text += re.sub('<[^>]*','',data) + "<break time='650ms'/>"
+            self.alerts_text += re.sub('<[^>]*>','',data) + "<break time='650ms'/>"
 
 alert_parser = AlertHTMLParser()
 
@@ -50,7 +50,7 @@ class ActHTMLParser(HTMLParser):
 
     def handle_data(self,data):
         if len(data) > 100 and self.summary:
-            self.act_text += re.sub('<[^>]*','',data) + "<break time='650ms'/>"
+            self.act_text += re.sub('<[^>]*>','',data) + "<break time='650ms'/>"
             self.summary = False
 
 act_parser = ActHTMLParser()
@@ -63,7 +63,7 @@ for entry in activity['entries'][0:3]:
 
 def build_speechlet_response(title, output, reprompt_text, should_end_session):
 
-    card_output = re.sub('<[^>]*','',output)
+    card_output = re.sub('<[^>]*>','',output)
     
     return {
         'outputSpeech': {
