@@ -34,12 +34,12 @@ class AlertHTMLParser(HTMLParser):
         if data == 'Overview':
             self.overview = True
         elif len(data) > 20 and self.overview:
-            self.alerts_text += data + '.'
+            self.alerts_text += re.sub('<[^>]*','',data) + '<break time='650ms'/>'
 
 alert_parser = AlertHTMLParser()
 
 for entry in alerts['entries'][0:5]:
-    alert_parser.alerts_text += entry['title'] + '.'
+    alert_parser.alerts_text += entry['title']
     alert_parser.feed(entry['summary'])
 
 class ActHTMLParser(HTMLParser):
@@ -50,13 +50,13 @@ class ActHTMLParser(HTMLParser):
 
     def handle_data(self,data):
         if len(data) > 100 and self.summary:
-            self.act_text += data + '.'
+            self.act_text += re.sub('<[^>]*','',data) + '<break time='650ms'/>'
             self.summary = False
 
 act_parser = ActHTMLParser()
 
 for entry in activity['entries'][0:5]:
-    act_parser.act_text += entry['title'] + '.'
+    act_parser.act_text += entry['title']
     act_parser.feed(entry['summary'])
 
 # --------------- Helpers that build all of the responses ----------------------
