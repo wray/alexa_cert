@@ -38,7 +38,8 @@ class AlertHTMLParser(HTMLParser):
 
 parser = AlertHTMLParser()
 
-for entry in alerts['entries']:
+for entry in alerts['entries'][0:5]:
+    logger.info(entry)
     alerts_text += entry['title'] + '.'
     alerts_text += parser.feed(entry['summary']) + '.'
 
@@ -53,7 +54,8 @@ class ActHTMLParser(HTMLParser):
 
 parser = ActHTMLParser()
 
-for entry in activity['entries']:
+for entry in activity['entries'][0:5]:
+    logger.info(entry)
     activity_text += entry['title'] + '.'
     activity_text += parser.feed(entry['summary']) + '.'
 
