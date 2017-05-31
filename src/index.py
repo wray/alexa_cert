@@ -27,7 +27,7 @@ class AlertHTMLParser(HTMLParser):
     alerts_text = ''
 
     def handle_starttag(self,tag,attrs):
-        if self.overview and tag != 'p'and tag != 'br' and != 'a':
+        if self.overview and tag != 'p'and tag != 'br' and tag != 'a':
             self.overview = False
     
     def handle_data(self,data):
