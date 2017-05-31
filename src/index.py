@@ -73,7 +73,7 @@ def build_speechlet_response(title, output, reprompt_text, should_end_session):
         },
         'card': {
             'type': 'Simple',
-            'title': 'Internet Threats',
+            'title': 'Current Issues',
             'content': card_output
         },
         'reprompt': {
@@ -157,7 +157,7 @@ def get_help():
     """
 
     return build_response({},build_speechlet_response(
-        "Tech Em Studios","""<speak>Internet Threats grabs the latest activity and alerts from the U S Computer Emergency Response Team. Just ask Internet Threats for Activity or Alerts.</speak>""","",False)) 
+        "Internet Threats","""<speak>Internet Threats grabs the latest activity and alerts from the U S Computer Emergency Response Team. Just ask Internet Threats for Activity or Alerts.</speak>""","",False)) 
 
 
 def on_intent(intent_request, session):
