@@ -22,6 +22,9 @@ activity_text = ''
 alerts = feedparser.parse('https://www.us-cert.gov/ncas/alerts.xml')
 activity = feedparser.parse('https://www.us-cert.gov/ncas/current-activity.xml')
 
+logger.info(alerts)
+logger.info(activity)
+
 class AlertHTMLParser(HTMLParser):
 
     overview = False
