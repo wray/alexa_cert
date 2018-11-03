@@ -1,0 +1,13 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  alexa_cert:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Description: Lambda that supports the Internet Threats Skill  .
+      Handler: index.lambda_handler
+      MemorySize: 128
+      Role: 'arn:aws:iam::980316180835:role/lambda_techem_skill'
+      Runtime: python3.6
+      Timeout: 3
